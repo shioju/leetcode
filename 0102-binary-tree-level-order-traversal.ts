@@ -15,13 +15,13 @@
 function levelOrder(root: TreeNode | null): number[][] {
   if (root === null) return [];
   const result = [];
-  const stack = [];
-  stack.push([root, 0]);
-  while (stack.length > 0) {
-    let [node, level] = stack.pop();
+  const queue = [];
+  queue.push([root, 0]);
+  while (queue.length > 0) {
+    let [node, level] = queue.shift();
     result[level] = (result[level] || []).concat(node.val);
-    if (node.right) stack.push([node.right, level + 1]);
-    if (node.left) stack.push([node.left, level + 1]);
+    if (node.left) queue.push([node.left, level + 1]);
+    if (node.right) queue.push([node.right, level + 1]);
   }
   return result;
 }
